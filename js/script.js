@@ -26,42 +26,49 @@ function colorLink(){
 linkColor.forEach(l => l.addEventListener('click', colorLink))
 
 
+
 // datatable js
 $(document).ready(function () {
-    // Initialize DataTable
-    var table = $('#example').DataTable({
-    //   dom: 'Bfrtip',
+  // Initialize DataTable
+  var table = $('#example').DataTable({
       buttons: [
-        {
-          extend: 'excelHtml5',
-          title: 'Data Export'
-        },
-        {
-          extend: 'pdfHtml5',
-          title: 'Data Export'
-        },
-        {
-          extend: 'print',
-          title: 'Data Export'
-        }
+          {
+              extend: 'excelHtml5',
+              title: 'LunchBox',
+              exportOptions: {
+                  columns: ':not(:last-child)' // Exclude the last column
+              }
+          },
+          {
+              extend: 'pdfHtml5',
+              title: 'LunchBox',
+              exportOptions: {
+                  columns: ':not(:last-child)' // Exclude the last column
+              }
+          },
+          {
+              extend: 'print',
+              title: 'LunchBox',
+              exportOptions: {
+                  columns: ':not(:last-child)' // Exclude the last column
+              }
+          }
       ]
-    });
-
-    // Custom Button Handlers
-    $('#btnExcel').on('click', function () {
-      table.button('.buttons-excel').trigger();
-    });
-
-    $('#btnPDF').on('click', function () {
-      table.button('.buttons-pdf').trigger();
-    });
-
-    $('#btnPrint').on('click', function () {
-      table.button('.buttons-print').trigger();
-    });
   });
 
+  // Custom Button Handlers
+  $('#btnExcel').on('click', function () {
+      table.button('.buttons-excel').trigger();
+  });
 
+  $('#btnPDF').on('click', function () {
+      table.button('.buttons-pdf').trigger();
+  });
+
+  $('#btnPrint').on('click', function () {
+      table.button('.buttons-print').trigger();
+  });
+});
 
 
 

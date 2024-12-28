@@ -91,10 +91,10 @@
                 <div class="content-card">
                     <div class="container-fluid container-text mt-3">
                       <div class="row">
-                            <h1>CUSTOMER SECTION</h1><hr>
+                            <h1>TIFFIN SECTION</h1><hr>
                             <div class="row mt-2">
                                 <div class="col-lg-6 mt-2">
-                                    <button class="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"><img class="img-fluid pe-1" src="https://img.icons8.com/?size=24&id=84991&format=png" alt="">ADD Customer</button>
+                                    <button class="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"><img class="img-fluid pe-1" src="https://img.icons8.com/?size=24&id=84991&format=png" alt="">ADD Tiffin type</button>
                                     <!-- add modal -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -107,28 +107,14 @@
                                                     <form>
                                                         <!-- Name -->
                                                         <div class="mb-3">
-                                                          <label for="name" class="form-label">Name</label>
-                                                          <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                                          <label for="name" class="form-label">Tiffin Name</label>
+                                                          <input type="text" class="form-control" id="name" placeholder="Enter Tiffin name" required>
                                                         </div>
-                                                    
-                                                        <!-- Email -->
+                                                         <!-- Name -->
                                                         <div class="mb-3">
-                                                          <label for="email" class="form-label">Email</label>
-                                                          <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                                            <label for="name" class="form-label">Tiffin Price</label>
+                                                            <input type="number" class="form-control" id="name" placeholder="Enter Tiffin Price" required>
                                                         </div>
-                                                    
-                                                        <!-- Phone -->
-                                                        <div class="mb-3">
-                                                          <label for="phone" class="form-label">Phone</label>
-                                                          <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
-                                                        </div>
-                                                    
-                                                        <!-- Address -->
-                                                        <div class="mb-3">
-                                                          <label for="address" class="form-label">Address</label>
-                                                          <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
-                                                        </div>
-                                                    
                                                         <!-- Submit Button -->
                                                         <button onclick="showSuccessAlert()" type="submit" class="button">Submit</button>
                                                       </form>
@@ -149,19 +135,15 @@
                                 <table id="example" class="display pt-3" style="width:100%">
                                     <thead>
                                       <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
+                                        <th>Tiffin Name</th>
+                                        <th>Tiffin Price (RS Per TIFFIN)</th>
                                         <th>Action</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <td>Ashwani hada</td>
-                                        <td>Ashwanihada@gmial.com</td>
-                                        <td>+91969292992</td>
-                                        <td>B-18 Baran , Rajasthan</td>
+                                        <td>Large</td>
+                                        <td>90</td>
                                         <td>
                                             <a href="" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
                                             <!-- edit modal -->
@@ -176,31 +158,17 @@
                                                             <form>
                                                                 <!-- Name -->
                                                                 <div class="mb-3">
-                                                                <label for="name" class="form-label">Name</label>
-                                                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                                                  <label for="name" class="form-label">Tiffin Name</label>
+                                                                  <input type="text" class="form-control" id="name" placeholder="Enter Tiffin name" required>
                                                                 </div>
-                                                            
-                                                                <!-- Email -->
+                                                                 <!-- Name -->
                                                                 <div class="mb-3">
-                                                                <label for="email" class="form-label">Email</label>
-                                                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                                                    <label for="name" class="form-label">Tiffin Price</label>
+                                                                    <input type="number" class="form-control" id="name" placeholder="Enter Tiffin Price" required>
                                                                 </div>
-                                                            
-                                                                <!-- Phone -->
-                                                                <div class="mb-3">
-                                                                <label for="phone" class="form-label">Phone</label>
-                                                                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
-                                                                </div>
-                                                            
-                                                                <!-- Address -->
-                                                                <div class="mb-3">
-                                                                <label for="address" class="form-label">Address</label>
-                                                                <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
-                                                                </div>
-                                                            
                                                                 <!-- Submit Button -->
-                                                                <button  type="submit" class="button">Submit</button>
-                                                            </form>
+                                                                <button onclick="showSuccessAlert()" type="submit" class="button">Submit</button>
+                                                              </form>
                                                         </div>
                                                     </div>
                                                     </div>
