@@ -91,29 +91,62 @@
                 <div class="content-card">
                     <div class="container-fluid container-text mt-3">
                       <div class="row">
-                            <h1>TIFFIN SECTION</h1><hr>
+                            <h1>ADD TIFFIN SECTION</h1><hr>
                             <div class="row mt-2">
                                 <div class="col-lg-6 mt-2">
-                                    <button class="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"><img class="img-fluid pe-1" src="https://img.icons8.com/?size=24&id=84991&format=png" alt="">ADD Tiffin Type</button>
+                                    <button class="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"><img class="img-fluid pe-1" src="https://img.icons8.com/?size=24&id=84991&format=png" alt="">ADD TIFFIN order</button>
                                     <!-- add modal -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Fill Details To add Customer</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Fill Details To Tiffin Order</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form>
-                                                        <!-- Name -->
                                                         <div class="mb-3">
-                                                          <label for="name" class="form-label">Tiffin Name</label>
-                                                          <input type="text" class="form-control" id="name" placeholder="Enter Tiffin name" required>
+                                                            <label for="" class="form-label">Select Customer</label>
+                                                            <select class="form-select" aria-label="Default select example">
+                                                                <option selected>Open this select Customer</option>
+                                                                <option value="1">Ashwani</option>
+                                                                <option value="2">Mukul</option>
+                                                                <option value="3">Ramesh</option>
+                                                            </select>
                                                         </div>
                                                          <!-- Name -->
                                                         <div class="mb-3">
-                                                            <label for="name" class="form-label">Tiffin Price</label>
-                                                            <input type="number" class="form-control" id="name" placeholder="Enter Tiffin Price" required>
+                                                            <label for="name" class="form-label">Date</label>
+                                                            <input type="date" class="form-control" id="name" placeholder="Enter Tiffin Date" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Select Meal Time</label>
+                                                            <select class="form-select" aria-label="Default select example">
+                                                                <option selected>Open this select  time</option>
+                                                                <option value="Lunch">Lunch</option>
+                                                                <option value="Dinner">Dinner</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Select Tiffin Type</label>
+                                                            <select class="form-select" aria-label="Default select example">
+                                                                <option selected>Open this select type</option>
+                                                                <option value="small">Small</option>
+                                                                <option value="big">Big</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Enter Tiffin Count</label>
+                                                            <input type="number" name="" id="" class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Select Status</label>
+                                                            <select class="form-select" aria-label="Default select example">
+                                                                <option selected>Open this select type</option>
+                                                                <option value="Delivered">Delivered</option>
+                                                                <option value="Pending">Pending</option>
+                                                                <option value="Cancel">Cancel</option>
+                                                            </select>
                                                         </div>
                                                         <!-- Submit Button -->
                                                         <button onclick="showSuccessAlert()" type="submit" class="button">Submit</button>
@@ -135,19 +168,27 @@
                                 <table id="example" class="display pt-3" style="width:100%">
                                     <thead>
                                       <tr>
-                                        <th>Tiffin Name</th>
-                                        <th>Tiffin Price (RS Per TIFFIN)</th>
+                                        <th>Customer Name</th>
+                                        <th>Date</th>
+                                        <th>Meal Time</th>
+                                        <th>Tiffin Type</th>
+                                        <th>Tiffin Count</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <td>Large</td>
-                                        <td>90</td>
+                                        <td>Ashwani</td>
+                                        <td>20/12/2024</td>
+                                        <td>Lunch</td>
+                                        <td>Small</td>
+                                        <td>1</td>
+                                        <td>Delivered</td>
                                         <td>
-                                            <a href="" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
+                                            <a href="" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
                                             <!-- edit modal -->
-                                                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -156,18 +197,51 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form>
-                                                                <!-- Name -->
                                                                 <div class="mb-3">
-                                                                  <label for="name" class="form-label">Tiffin Name</label>
-                                                                  <input type="text" class="form-control" id="name" placeholder="Enter Tiffin name" required>
+                                                                    <label for="" class="form-label">Select Customer</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Open this select Customer</option>
+                                                                        <option value="1">Ashwani</option>
+                                                                        <option value="2">Mukul</option>
+                                                                        <option value="3">Ramesh</option>
+                                                                    </select>
                                                                 </div>
                                                                  <!-- Name -->
                                                                 <div class="mb-3">
-                                                                    <label for="name" class="form-label">Tiffin Price</label>
-                                                                    <input type="number" class="form-control" id="name" placeholder="Enter Tiffin Price" required>
+                                                                    <label for="name" class="form-label">Date</label>
+                                                                    <input type="date" class="form-control" id="name" placeholder="Enter Tiffin Date" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Select Meal Time</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Open this select  time</option>
+                                                                        <option value="Lunch">Lunch</option>
+                                                                        <option value="Dinner">Dinner</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Select Tiffin Type</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Open this select type</option>
+                                                                        <option value="small">Small</option>
+                                                                        <option value="big">Big</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Enter Tiffin Count</label>
+                                                                    <input type="number" name="" id="" class="form-control">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Select Status</label>
+                                                                    <select class="form-select" aria-label="Default select example">
+                                                                        <option selected>Open this select type</option>
+                                                                        <option value="Delivered">Delivered</option>
+                                                                        <option value="Pending">Pending</option>
+                                                                        <option value="Cancel">Cancel</option>
+                                                                    </select>
                                                                 </div>
                                                                 <!-- Submit Button -->
-                                                                <button onclick="showSuccessAlert()" type="submit" class="button">Submit</button>
+                                                                <button  type="submit" class="button">Submit</button>
                                                               </form>
                                                         </div>
                                                     </div>
