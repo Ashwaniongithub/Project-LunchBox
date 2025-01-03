@@ -108,7 +108,8 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post" action="customer.php">
+                                                   
+                                                    <form method="post">
                                                         <!-- Name -->
                                                         <div class="mb-3">
                                                           <label for="name" class="form-label">Name</label>
