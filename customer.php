@@ -19,6 +19,10 @@
         <title>LunchBox</title>
     </head>
     <body>
+        <?php 
+        include ('dbcon.php')
+        ?>
+       
         <!--========== HEADER ==========-->
         <header class="header">
             <div class="header__container">
@@ -104,33 +108,33 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    <form method="post" action="customer.php">
                                                         <!-- Name -->
                                                         <div class="mb-3">
                                                           <label for="name" class="form-label">Name</label>
-                                                          <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                                          <input type="text" class="form-control" name="name" placeholder="Enter your name" required>
                                                         </div>
                                                     
                                                         <!-- Email -->
                                                         <div class="mb-3">
                                                           <label for="email" class="form-label">Email</label>
-                                                          <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                                          <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
                                                         </div>
                                                     
                                                         <!-- Phone -->
                                                         <div class="mb-3">
                                                           <label for="phone" class="form-label">Phone</label>
-                                                          <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                                                          <input type="tel" class="form-control" name="phone" placeholder="Enter your phone number" required>
                                                         </div>
                                                     
                                                         <!-- Address -->
                                                         <div class="mb-3">
                                                           <label for="address" class="form-label">Address</label>
-                                                          <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+                                                          <textarea class="form-control" name="address" rows="3" placeholder="Enter your address" required></textarea>
                                                         </div>
                                                     
                                                         <!-- Submit Button -->
-                                                        <button onclick="showSuccessAlert()" type="submit" class="button">Submit</button>
+                                                        <button  name="submitbtn" type="submit" class="button">Submit</button>
                                                       </form>
                                                 </div>
                                             </div>
@@ -157,58 +161,70 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr>
-                                        <td>Ashwani hada</td>
-                                        <td>Ashwanihada@gmial.com</td>
-                                        <td>+91969292992</td>
-                                        <td>B-18 Baran , Rajasthan</td>
-                                        <td>
-                                            <a href="" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
-                                            <!-- edit modal -->
-                                                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Fill Details To add Customer</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <?php 
+                                            $query="select * from `customer`";
+                                            $result=mysqli_query($connection, $query);
+                                            if(!$result){
+                                                die("Query failed due to" .mysqli_error($connection));
+                                            }else{
+                                                while($row=mysqli_fetch_assoc($result)){
+                                         ?>
+                                            <tr>
+                                                <td><?php echo $row['name'] ?></td>
+                                                <td><?php echo $row['email'] ?></td>
+                                                <td><?php echo $row['phone'] ?></td>
+                                                <td><?php echo $row['address'] ?></td>
+                                                <td>
+                                                    <a href="" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
+                                                    <!-- edit modal -->
+                                                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Fill Details To add Customer</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form>
+                                                                        <!-- Name -->
+                                                                        <div class="mb-3">
+                                                                        <label for="name" class="form-label">Name</label>
+                                                                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                                                        </div>
+                                                                    
+                                                                        <!-- Email -->
+                                                                        <div class="mb-3">
+                                                                        <label for="email" class="form-label">Email</label>
+                                                                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                                                        </div>
+                                                                    
+                                                                        <!-- Phone -->
+                                                                        <div class="mb-3">
+                                                                        <label for="phone" class="form-label">Phone</label>
+                                                                        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                                                                        </div>
+                                                                    
+                                                                        <!-- Address -->
+                                                                        <div class="mb-3">
+                                                                        <label for="address" class="form-label">Address</label>
+                                                                        <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+                                                                        </div>
+                                                                    
+                                                                        <!-- Submit Button -->
+                                                                        <button  type="submit" class="button">Submit</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <form>
-                                                                <!-- Name -->
-                                                                <div class="mb-3">
-                                                                <label for="name" class="form-label">Name</label>
-                                                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-                                                                </div>
-                                                            
-                                                                <!-- Email -->
-                                                                <div class="mb-3">
-                                                                <label for="email" class="form-label">Email</label>
-                                                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                                                                </div>
-                                                            
-                                                                <!-- Phone -->
-                                                                <div class="mb-3">
-                                                                <label for="phone" class="form-label">Phone</label>
-                                                                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
-                                                                </div>
-                                                            
-                                                                <!-- Address -->
-                                                                <div class="mb-3">
-                                                                <label for="address" class="form-label">Address</label>
-                                                                <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
-                                                                </div>
-                                                            
-                                                                <!-- Submit Button -->
-                                                                <button  type="submit" class="button">Submit</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            <a href="#" class="button" id="delete-button"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""></a>
+                                                    <a href="#" class="button" id="delete-button"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""></a>
 
-                                        </td>
-                                      </tr>
+                                                </td>
+                                            </tr>
+                                                <?php 
+                                                }
+                                            }
+                                            ?>
                                       <!-- Add more rows as needed -->
                                     </tbody>
                                   </table>
