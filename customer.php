@@ -1,3 +1,37 @@
+<?php 
+ include ('dbcon.php')
+ ?>
+
+<?php 
+
+// adding data php
+$adddatamsg=false;
+$validationerror=false;
+if($_SERVER['REQUEST_METHOD']=="POST"){
+ 
+    if(isset($_POST['addbtn'])){
+        $name=$_POST['name'];
+        $email=$_POST['email'];
+        $phone=$_POST['phone'];
+        $address=$_POST['address'];
+
+  
+        // form validation
+        if($name==""||empty($name) && $email==""||empty($email) && $phone==""||empty($phone) && $address==""||empty($address)){
+          $validationerror=true;
+        }else{
+            $query="INSERT into `customer` (`name`,`email` , `phone`,`address` , `date`) values ('$name','$email' , '$phone' , '$address' , current_timestamp()) ";
+            $result=mysqli_query($connection,$query);
+            if(!$result){
+                die("query failed due to" .mysqli_error($connection));
+            }else{
+              $adddatamsg=true;
+            }
+  
+        }
+      }
+  };
+?>
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -19,9 +53,7 @@
         <title>LunchBox</title>
     </head>
     <body>
-        <?php 
-        include ('dbcon.php')
-        ?>
+     
        
         <!--========== HEADER ==========-->
         <header class="header">
@@ -135,7 +167,7 @@
                                                         </div>
                                                     
                                                         <!-- Submit Button -->
-                                                        <button  name="submitbtn" type="submit" class="button">Submit</button>
+                                                        <button  name="addbtn" type="submit" class="button">Submit</button>
                                                       </form>
                                                 </div>
                                             </div>
@@ -154,6 +186,7 @@
                                 <table id="example" class="display pt-3" style="width:100%">
                                     <thead>
                                       <tr>
+                                        <th>Sr No.</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
@@ -165,12 +198,15 @@
                                         <?php 
                                             $query="select * from `customer`";
                                             $result=mysqli_query($connection, $query);
+                                            $sno=0;
                                             if(!$result){
                                                 die("Query failed due to" .mysqli_error($connection));
                                             }else{
                                                 while($row=mysqli_fetch_assoc($result)){
+                                                $sno=$sno + 1;
                                          ?>
                                             <tr>
+                                                <td><?php echo $sno ?></td>
                                                 <td><?php echo $row['name'] ?></td>
                                                 <td><?php echo $row['email'] ?></td>
                                                 <td><?php echo $row['phone'] ?></td>
