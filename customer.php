@@ -7,6 +7,8 @@
 // adding data php
 $adddatamsg=false;
 $validationerror=false;
+$updatemsg=false;
+
 if($_SERVER['REQUEST_METHOD']=="POST"){
  
     if(isset($_POST['addbtn'])){
@@ -31,6 +33,30 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         }
       }
   };
+
+// edit data php 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if(isset($_POST['updatebtn'])){
+        $id = $_POST['id']; 
+        $name=$_POST['name'];
+        $email=$_POST['email'];
+        $phone=$_POST['phone'];
+        $address=$_POST['address'];
+    
+    
+        $query = "UPDATE `customer` SET `name` = '$name', `email` = '$email' , `phone` = '$phone' , `address` ='$address'   WHERE `customer`.`id` = '$id' ";
+        $result = mysqli_query($connection, $query);
+    
+        if ($result) {
+            // header("Location:customer.php");
+            $updatemsg=true;
+            
+        } else {
+            echo "Error updating record: " . mysqli_error($connection);
+        }
+    }
+  }
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -141,29 +167,29 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                                                 </div>
                                                 <div class="modal-body">
                                                    
-                                                    <form method="post">
+                                                    <form method="post" action="customer.php">
                                                         <!-- Name -->
                                                         <div class="mb-3">
                                                           <label for="name" class="form-label">Name</label>
-                                                          <input type="text" class="form-control" name="name" placeholder="Enter your name" required>
+                                                          <input type="text" class="form-control" name="name" placeholder="Enter your name" >
                                                         </div>
                                                     
                                                         <!-- Email -->
                                                         <div class="mb-3">
                                                           <label for="email" class="form-label">Email</label>
-                                                          <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
+                                                          <input type="email" class="form-control" name="email" placeholder="Enter your email" >
                                                         </div>
                                                     
                                                         <!-- Phone -->
                                                         <div class="mb-3">
                                                           <label for="phone" class="form-label">Phone</label>
-                                                          <input type="tel" class="form-control" name="phone" placeholder="Enter your phone number" required>
+                                                          <input type="tel" class="form-control" name="phone" placeholder="Enter your phone number" >
                                                         </div>
                                                     
                                                         <!-- Address -->
                                                         <div class="mb-3">
                                                           <label for="address" class="form-label">Address</label>
-                                                          <textarea class="form-control" name="address" rows="3" placeholder="Enter your address" required></textarea>
+                                                          <input class="form-control" name="address"  placeholder="Enter your address" ></textarea>
                                                         </div>
                                                     
                                                         <!-- Submit Button -->
@@ -182,7 +208,37 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                                     </div>
                                 </div>
                             </div>
-                            <div class="table-responsive mt-5">
+                            <div class="mt-3 mb-3">
+                            <!-- alert message php -->
+                            <?php
+                            if($adddatamsg){
+                                echo '
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Customer Added</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                            };
+                            if($validationerror){
+                                echo '
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Please Fill The Full Form </strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                            };
+                           
+                            if($updatemsg){
+                                echo '
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Customer Data Updated </strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                            };
+                             ?>
+                             </div>
+                            <div class="table-responsive mt-1">
                                 <table id="example" class="display pt-3" style="width:100%">
                                     <thead>
                                       <tr>
@@ -212,9 +268,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                                                 <td><?php echo $row['phone'] ?></td>
                                                 <td><?php echo $row['address'] ?></td>
                                                 <td>
-                                                    <a href="" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
+                                                    <a href="" class="button" data-bs-toggle="modal" data-bs-target="#customeredit<?php echo $row['id'] ?>"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
                                                     <!-- edit modal -->
-                                                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="customeredit<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -222,33 +278,37 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form>
+                                                                    <form method="post"  action="customer.php" >
+                                                                    <div class="mb-3" style="display: none;">
+                                                                        <label for="name" class="form-label">Db Id</label>
+                                                                        <input type="text" class="form-control" name="id" value="<?php echo $row['id'] ?>">
+                                                                        </div>
                                                                         <!-- Name -->
                                                                         <div class="mb-3">
                                                                         <label for="name" class="form-label">Name</label>
-                                                                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                                                        <input type="text" class="form-control" name="name" value="<?php echo $row['name'] ?>">
                                                                         </div>
                                                                     
                                                                         <!-- Email -->
                                                                         <div class="mb-3">
                                                                         <label for="email" class="form-label">Email</label>
-                                                                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                                                        <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>">
                                                                         </div>
                                                                     
                                                                         <!-- Phone -->
                                                                         <div class="mb-3">
                                                                         <label for="phone" class="form-label">Phone</label>
-                                                                        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                                                                        <input type="tel" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
                                                                         </div>
                                                                     
                                                                         <!-- Address -->
                                                                         <div class="mb-3">
                                                                         <label for="address" class="form-label">Address</label>
-                                                                        <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+                                                                        <input class="form-control" id="address" name="address" value="<?php echo $row['address'] ?>" >
                                                                         </div>
                                                                     
                                                                         <!-- Submit Button -->
-                                                                        <button  type="submit" class="button">Submit</button>
+                                                                        <button  type="submit" name="updatebtn" class="button">Submit</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
