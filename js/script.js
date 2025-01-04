@@ -89,4 +89,22 @@ function confirmDelete(id) {
             window.location.href = "customer.php?id=" + id;
         }
     });
-}
+};
+
+function confirmtiffinDelete(id) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to the delete link with the ID
+            window.location.href = "tiffin_type.php?id=" + id;
+        }
+    });
+};
+
