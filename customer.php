@@ -57,6 +57,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
   }
+
+// delete data php
+if(isset($_GET['id'])){
+    $id=$_GET['id'];
+
+$query="DELETE from `customer` where `id`='$id'";
+$result=mysqli_query($connection,$query);
+
+    if(!$result){
+        die("query failed".mysqli_error($connection));
+    }else{
+        header('location:customer.php');
+    }
+} 
+
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -267,55 +282,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <td><?php echo $row['email'] ?></td>
                                                 <td><?php echo $row['phone'] ?></td>
                                                 <td><?php echo $row['address'] ?></td>
-                                                <td>
+                                                <td class="d-flex ">
                                                     <a href="" class="button" data-bs-toggle="modal" data-bs-target="#customeredit<?php echo $row['id'] ?>"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
                                                     <!-- edit modal -->
                                                         <div class="modal fade" id="customeredit<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Fill Details To add Customer</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Fill Details To add Customer</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form method="post"  action="customer.php" >
+                                                                        <div class="mb-3" style="display: none;">
+                                                                            <label for="name" class="form-label">Db Id</label>
+                                                                            <input type="text" class="form-control" name="id" value="<?php echo $row['id'] ?>">
+                                                                            </div>
+                                                                            <!-- Name -->
+                                                                            <div class="mb-3">
+                                                                            <label for="name" class="form-label">Name</label>
+                                                                            <input type="text" class="form-control" name="name" value="<?php echo $row['name'] ?>">
+                                                                            </div>
+                                                                        
+                                                                            <!-- Email -->
+                                                                            <div class="mb-3">
+                                                                            <label for="email" class="form-label">Email</label>
+                                                                            <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>">
+                                                                            </div>
+                                                                        
+                                                                            <!-- Phone -->
+                                                                            <div class="mb-3">
+                                                                            <label for="phone" class="form-label">Phone</label>
+                                                                            <input type="tel" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
+                                                                            </div>
+                                                                        
+                                                                            <!-- Address -->
+                                                                            <div class="mb-3">
+                                                                            <label for="address" class="form-label">Address</label>
+                                                                            <input class="form-control" id="address" name="address" value="<?php echo $row['address'] ?>" >
+                                                                            </div>
+                                                                        
+                                                                            <!-- Submit Button -->
+                                                                            <button  type="submit" name="updatebtn" class="button">Submit</button>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <form method="post"  action="customer.php" >
-                                                                    <div class="mb-3" style="display: none;">
-                                                                        <label for="name" class="form-label">Db Id</label>
-                                                                        <input type="text" class="form-control" name="id" value="<?php echo $row['id'] ?>">
-                                                                        </div>
-                                                                        <!-- Name -->
-                                                                        <div class="mb-3">
-                                                                        <label for="name" class="form-label">Name</label>
-                                                                        <input type="text" class="form-control" name="name" value="<?php echo $row['name'] ?>">
-                                                                        </div>
-                                                                    
-                                                                        <!-- Email -->
-                                                                        <div class="mb-3">
-                                                                        <label for="email" class="form-label">Email</label>
-                                                                        <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>">
-                                                                        </div>
-                                                                    
-                                                                        <!-- Phone -->
-                                                                        <div class="mb-3">
-                                                                        <label for="phone" class="form-label">Phone</label>
-                                                                        <input type="tel" class="form-control" name="phone" value="<?php echo $row['phone'] ?>">
-                                                                        </div>
-                                                                    
-                                                                        <!-- Address -->
-                                                                        <div class="mb-3">
-                                                                        <label for="address" class="form-label">Address</label>
-                                                                        <input class="form-control" id="address" name="address" value="<?php echo $row['address'] ?>" >
-                                                                        </div>
-                                                                    
-                                                                        <!-- Submit Button -->
-                                                                        <button  type="submit" name="updatebtn" class="button">Submit</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
                                                             </div>
                                                         </div>
-                                                    <a href="#" class="button" id="delete-button"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""></a>
-
+                                                   
+                                                    <a href="#" onclick="confirmDelete(<?php echo $row['id']; ?>)"  class="button" type="submit" ><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" alt=""></a>
+                                                    
                                                 </td>
                                             </tr>
                                                 <?php 
@@ -331,9 +347,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </section>
         </main>
-
-
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
