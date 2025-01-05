@@ -1,3 +1,8 @@
+<?php 
+include ('dbcon.php')
+?>
+
+
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -93,22 +98,22 @@
                       <div class="row">
                             <h1>REVENUE SECTION</h1><hr>
                             <div class="col-lg-6">
-                                <form class="row g-3 justify-content-center">
+                                <form method="Post" action="revenue.php" class="row g-3 justify-content-center">
                                     <!-- From Date -->
                                     <div class="col-md-4">
                                         <label for="fromDate" class="form-label">From Date</label>
-                                        <input type="date" class="form-control" id="fromDate" required>
+                                        <input type="date"  class="form-control" name="fromdate" required>
                                     </div>
                                     
                                     <!-- To Date -->
                                     <div class="col-md-4">
                                         <label for="toDate" class="form-label">To Date</label>
-                                        <input type="date" class="form-control" id="toDate" required>
+                                        <input type="date" name="todate" class="form-control" required>
                                     </div>
                                     
                                     <!-- Submit Button -->
                                     <div class="col-md-2 d-flex align-items-end">
-                                        <button type="submit" class="button">Filter</button>
+                                        <button type="submit" name="filterbtn" class="button">Filter</button>
                                     </div>
                                 </form>
                             </div>
@@ -120,12 +125,35 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                    <th>Total Expenses</th>
+                                        <th>Total Expenses</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                    <td class="text-danger"><b>3721</b></td>
+                                    <?php
+                                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                            if(isset($_POST['filterbtn'])){
+                                                $fromdate = $_POST['fromdate'];
+                                                $todate = $_POST['todate'];
+
+                                                $query = "SELECT SUM(amount) AS total_expenses 
+                                                        FROM expense 
+                                                        WHERE date >= '$fromdate' AND date <= '$todate'";
+                                                $result = mysqli_query($connection, $query);
+
+                                                // Fetch result
+                                                $row = mysqli_fetch_assoc($result);
+                                                $total_expenses = $row['total_expenses'] ?? 0;
+                                                ?> 
+                                                <td style="color: red;" ><?php echo $row ['total_expenses'] ?? 0 ?> </td>
+                                                
+                                                <?php
+                                                // Close connection
+                                                mysqli_close($connection);
+                                            }
+                                        }
+
+                                        ?>
                                     </tr>
                                 </tbody>
                             </table>
@@ -195,76 +223,3 @@
 
 
 
-
-<!-- <div class="row mt-5 d-flex justify-content-center">
-    <div class="col-lg-3 text-center ">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                <th>Vegitable</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>330</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-lg-3 text-center ">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                <th>Gas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>330</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-lg-3 text-center ">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                <th>Vegitable</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>330</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-lg-3 text-center ">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                <th>Kitchen Stuff</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>330</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-lg-3 text-center ">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                <th>Other</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>330</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-  </div> -->
