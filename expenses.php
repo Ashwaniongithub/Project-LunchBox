@@ -190,11 +190,11 @@ $result=mysqli_query($connection,$query);
                                                             <label for="">Expense Category</label>
                                                             <select class="form-select" name="category" aria-label="Default select example">
                                                                 <option selected>Open this select Category</option>
-                                                                <option value="1">Vegitable</option>
-                                                                <option value="2">Transport</option>
-                                                                <option value="3">Gas</option>
-                                                                <option value="3">Kitchen Stuff</option>
-                                                                <option value="3">Other</option>
+                                                                <option value="Vegitable">Vegitable</option>
+                                                                <option value="Transport">Transport</option>
+                                                                <option value="Gas">Gas</option>
+                                                                <option value="Kitchen Stuff">Kitchen Stuff</option>
+                                                                <option value="Other">Other</option>
                                                               </select>
                                                         </div>
                                                         <div class="mb-3">
