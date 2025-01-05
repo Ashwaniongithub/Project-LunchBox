@@ -35,6 +35,30 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
   };
 
 
+// edit data
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if(isset($_POST['updatebtn'])){
+        $id = $_POST['id']; 
+        $mealtime=$_POST['mealtime'];
+        $tiffintype=$_POST['tiffintype'];
+        $tiffincount=$_POST['tiffincount'];
+        $status=$_POST['status'];
+    
+        $query = "UPDATE `tiffinorder` SET  `mealtime` ='$mealtime' , `tiffintype` ='$tiffintype' , `tiffincount` ='$tiffincount' , `status`='$status'  WHERE `tiffinorder`.`id` = '$id'";
+        $result = mysqli_query($connection, $query);
+    
+        if ($result) {
+            // header("Location:customer.php");
+            $updatemsg=true;
+            
+        } else {
+            echo "Error updating record: " . mysqli_error($connection);
+        }
+    }
+  }
+
+
+
 // delete data php
 // delete data php
 if(isset($_GET['id'])){
@@ -238,7 +262,37 @@ $result=mysqli_query($connection,$query);
                                     </div>
                                 </div>
                             </div>
-                            <div class="table-responsive mt-5">
+                            <div class="mt-3 mb-3"> 
+                                 <!-- alert message php -->
+                            <?php
+                            if($adddatamsg){
+                                echo '
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Tiffin Added</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                            };
+                            if($validationerror){
+                                echo '
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Please Fill The Full Form </strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                            };
+                           
+                            if($updatemsg){
+                                echo '
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Tiffin Data Updated </strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                            };
+                             ?>
+                            </div>
+                            <div class="table-responsive mt-2">
                                 <table id="example" class="display pt-3" style="width:100%">
                                     <thead>
                                       <tr>
@@ -272,9 +326,9 @@ $result=mysqli_query($connection,$query);
                                                 <td><?php echo $row ['tiffincount'] ?></td>
                                                 <td><?php echo $row ['status'] ?></td>
                                                 <td>
-                                                    <a href="" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
+                                                    <a href="" class="button" data-bs-toggle="modal" data-bs-target="#tiffinorderedit<?php echo $row['id'] ?>"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
                                                     <!-- edit modal -->
-                                                        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="tiffinorderedit<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -282,52 +336,67 @@ $result=mysqli_query($connection,$query);
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form>
+                                                                    <form method="post" action="add_tiffin_order.php">
+                                                                    <div class="mb-3" style="display: none;" >
+                                                                    <label for="name" class="form-label">Db Id</label>
+                                                                    <input type="text" class="form-control" name="id" value="<?php echo $row['id'] ?>">
+                                                                    </div>
                                                                         <div class="mb-3">
                                                                             <label for="" class="form-label">Select Customer</label>
-                                                                            <select class="form-select" aria-label="Default select example">
-                                                                                <option selected>Open this select Customer</option>
-                                                                                <option value="1">Ashwani</option>
-                                                                                <option value="2">Mukul</option>
-                                                                                <option value="3">Ramesh</option>
+                                                                            <select class="form-select" name="customer"  aria-label="Default select example" disabled>
+                                                                                <option selected><?php echo $row['customer'] ?></option>      
                                                                             </select>
                                                                         </div>
                                                                         <!-- Name -->
                                                                         <div class="mb-3">
                                                                             <label for="name" class="form-label">Date</label>
-                                                                            <input type="date" class="form-control" id="name" placeholder="Enter Tiffin Date" required>
+                                                                            <input type="date" class="form-control" name="date" value="<?php echo $row['date']  ?>">
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="" class="form-label">Select Meal Time</label>
-                                                                            <select class="form-select" aria-label="Default select example">
-                                                                                <option selected>Open this select  time</option>
+                                                                            <select class="form-select" name="mealtime"  aria-label="Default select example">
+                                                                                <option selected><?php echo $row['mealtime']  ?></option>
                                                                                 <option value="Lunch">Lunch</option>
                                                                                 <option value="Dinner">Dinner</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="mb-3">
-                                                                            <label for="" class="form-label">Select Tiffin Type</label>
-                                                                            <select class="form-select" aria-label="Default select example">
-                                                                                <option selected>Open this select type</option>
-                                                                                <option value="small">Small</option>
-                                                                                <option value="big">Big</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="mb-3">
                                                                             <label for="" class="form-label">Enter Tiffin Count</label>
-                                                                            <input type="number" name="" id="" class="form-control">
+                                                                            <input type="number" name="tiffincount" id="" value="<?php echo $row['tiffincount']  ?>" class="form-control">
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="" class="form-label">Select Status</label>
-                                                                            <select class="form-select" aria-label="Default select example">
-                                                                                <option selected>Open this select type</option>
+                                                                            <select class="form-select" name="status" aria-label="Default select example">
+                                                                                <option selected><?php echo $row ['status'] ?></option>
                                                                                 <option value="Delivered">Delivered</option>
                                                                                 <option value="Pending">Pending</option>
                                                                                 <option value="Cancel">Cancel</option>
                                                                             </select>
                                                                         </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="" class="form-label">Select Tiffin Type</label>
+                                                                            <select class="form-select" name="tiffintype" aria-label="Default select example">
+                                                                                <option selected><?php echo $row ['tiffintype'] ?></option>
+                                                                                <?php
+                                                                                    $query="select * from `tiffintype`";
+                                                                                    $result=mysqli_query($connection, $query);
+                                                                                    if(!$result){
+                                                                                        die("Query failed due to" .mysqli_error($connection));
+                                                                                    }else{
+                                                                                        while($row=mysqli_fetch_assoc($result)){
+                                                                                ?>
+
+                                                                                <option value="<?php echo $row['name']?>"><?php echo $row['name']  ?></option>
+                                                                                <?php
+                                                                                        }
+                                                                                    }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                       
                                                                         <!-- Submit Button -->
-                                                                        <button  type="submit" class="button">Submit</button>
+                                                                        <button  type="submit" name="updatebtn" class="button">Submit</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
