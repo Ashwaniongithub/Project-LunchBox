@@ -145,7 +145,7 @@ include ('dbcon.php')
                                                 $row = mysqli_fetch_assoc($result);
                                                 $total_expenses = $row['total_expenses'] ?? 0;
                                                 ?> 
-                                                <td style="color: red;" ><?php echo $row ['total_expenses'] ?? 0 ?> </td>
+                                                <td style="color: red;" >  <?php echo $row ['total_expenses'] ?? 0 ?> RS</td>
                                                 
                                                 <?php
                                                 // Close connection
