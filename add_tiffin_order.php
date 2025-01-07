@@ -376,21 +376,8 @@ $result=mysqli_query($connection,$query);
                                                                         <div class="mb-3">
                                                                             <label for="" class="form-label">Select Tiffin Type</label>
                                                                             <select class="form-select" name="tiffintype" aria-label="Default select example">
-                                                                                <option selected><?php echo $row ['tiffintype'] ?></option>
-                                                                                <?php
-                                                                                    $query="select * from `tiffintype`";
-                                                                                    $result=mysqli_query($connection, $query);
-                                                                                    if(!$result){
-                                                                                        die("Query failed due to" .mysqli_error($connection));
-                                                                                    }else{
-                                                                                        while($row=mysqli_fetch_assoc($result)){
-                                                                                ?>
-
-                                                                                <option value="<?php echo $row['name']?>"><?php echo $row['name']  ?></option>
-                                                                                <?php
-                                                                                        }
-                                                                                    }
-                                                                                ?>
+                                                                                <option selected></option>
+                                                                                
                                                                             </select>
                                                                         </div>
                                                                         

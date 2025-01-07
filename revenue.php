@@ -148,8 +148,7 @@ include ('dbcon.php')
                                                 <td style="color: red;" >  <?php echo $row ['total_expenses'] ?? 0 ?> RS</td>
                                                 
                                                 <?php
-                                                // Close connection
-                                                mysqli_close($connection);
+                                              
                                             }
                                         }
 
@@ -167,7 +166,30 @@ include ('dbcon.php')
                                 </thead>
                                 <tbody>
                                     <tr>
-                                    <td class="text-warning"><b>39</b></td>
+                                    <?php
+                                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                            if(isset($_POST['filterbtn'])){
+                                                $fromdate = $_POST['fromdate'];
+                                                $todate = $_POST['todate'];
+
+                                                $query = "SELECT SUM(tiffincount) AS total_tiffin
+                                                        FROM tiffinorder 
+                                                        WHERE date >= '$fromdate' AND date <= '$todate'";
+                                                $result = mysqli_query($connection, $query);
+
+                                                // Fetch result
+                                                $row = mysqli_fetch_assoc($result);
+                                                $total_tiffin = $row['total_tiffin'] ?? 0;
+                                                ?> 
+                                                <td style="color: orange;" >  <?php echo $row ['total_tiffin'] ?? 0 ?> </td>
+                                                
+                                                <?php
+                                                // Close connection
+                                                mysqli_close($connection);
+                                            }
+                                        }
+
+                                        ?>
                                     </tr>
                                 </tbody>
                             </table>
