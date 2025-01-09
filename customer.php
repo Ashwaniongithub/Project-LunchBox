@@ -30,9 +30,12 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
               $adddatamsg=true;
             }
   
-        }
+        };
+        header("location:customer.php?msg=Data Added Successfully");
       }
   };
+
+
 
 // edit data php 
 
@@ -57,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
   }
+
 
 // delete data php
 if(isset($_GET['id'])){
@@ -226,6 +230,13 @@ $result=mysqli_query($connection,$query);
                             <div class="mt-3 mb-3">
                             <!-- alert message php -->
                             <?php
+                             if (isset($_GET['msg'])) {
+                                echo '<div class="alert alert-info alert-dismissible fade show" role="alert">'
+                                    . htmlspecialchars($_GET['msg']) .
+                                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
+                            };
+                          
                             if($adddatamsg){
                                 echo '
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
