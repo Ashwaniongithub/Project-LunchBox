@@ -9,16 +9,22 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- DataTables CSS -->
+         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+            <!-- Buttons CSS -->
+         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css">
+
         <link rel="stylesheet" href="css/style.css">
         <title>LunchBox</title>
     </head>
     <body>
-       <!--========== HEADER ==========-->
+        <!--========== HEADER ==========-->
         <header class="header">
             <div class="header__container">
                 <img src="assets/img/perfil.jpg" alt="" class="header__img">
 
-                <a href="dashboard.php" class="header__logo">LunchBox</a>
+                <a href="#" class="header__logo">LunchBox</a>
     
                 <div class="header__search">
                     <input type="search" placeholder="Search" class="header__input">
@@ -35,7 +41,7 @@
         <div class="nav" id="navbar">
             <nav class="nav__container">
                 <div>
-                    <a href="#" class="nav__link nav__logo">
+                    <a href="dashboard.php" class="nav__link nav__logo">
                         <i class='bx bxs-disc nav__icon' ></i>
                         <span class="nav__logo-name">LUNCHBOX</span>
                     </a>
