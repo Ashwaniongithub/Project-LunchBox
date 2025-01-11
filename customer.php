@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             }
   
         };
-        header("location:customer.php?msg=Data Added Successfully");
+        // header("location:customer.php?msg=Data Added Successfully");
       }
   };
 
@@ -231,7 +231,7 @@ $result=mysqli_query($connection,$query);
                                                 <td><?php echo $row['email'] ?></td>
                                                 <td><?php echo $row['phone'] ?></td>
                                                 <td><?php echo $row['address'] ?></td>
-                                                <td class="d-flex ">
+                                                <td >
                                                     <a href="" class="button" data-bs-toggle="modal" data-bs-target="#customeredit<?php echo $row['id'] ?>"><img style="height: 20px;" src="https://cdn-icons-png.flaticon.com/128/9308/9308015.png" alt=""></a>
                                                     <!-- edit modal -->
                                                         <div class="modal fade" id="customeredit<?php echo $row['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

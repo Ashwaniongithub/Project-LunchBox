@@ -35,8 +35,17 @@
                                 <div class="metric-card">
                                     <div class="d-flex justify-content-between align-items-start">
                                         <div>
-                                            <div class="metric-label">REVENUE </div>
-                                            <div class="metric-value">2356 RS</div>
+                                        <?php 
+                                             $query = "SELECT sum(amount) AS total_sells
+                                             FROM tiffinorder ";
+                                            $result = mysqli_query($connection, $query);
+
+                                            // Fetch result
+                                            $row = mysqli_fetch_assoc($result);
+                                            $total_sells = $row['total_sells'] ;
+                                            ?>
+                                            <div class="metric-label">TOTAL SALES </div>
+                                            <div class="metric-value"><?php echo $row ['total_sells'] ?>RS</div>
                                             <div class="metric-change">
                                                 <span class="negative">↓ 3.48%</span>
                                                 <span class="text-muted">Last Month</span>

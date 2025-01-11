@@ -61,7 +61,7 @@ include ('header.php');
                                                 $row = mysqli_fetch_assoc($result);
                                                 $total_expenses = $row['total_expenses'] ?? 0;
                                                 ?> 
-                                                <td style="color: red;" >  <?php echo $row ['total_expenses'] ?? 0 ?> RS</td>
+                                                <td style="color: red;"   >  <?php echo $row ['total_expenses'] ?? 0 ?> RS</td>
                                                 
                                                 <?php
                                               
@@ -101,7 +101,6 @@ include ('header.php');
                                                 
                                                 <?php
                                                 // Close connection
-                                                mysqli_close($connection);
                                             }
                                         }
 
@@ -114,22 +113,95 @@ include ('header.php');
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                    <th>Total Profit</th>
+                                    <th>Total Tiffin Sales</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                    <td class="text-success"><b>8282</b></td>
+                                    <?php
+                                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                            if(isset($_POST['filterbtn'])){
+                                                $fromdate = $_POST['fromdate'];
+                                                $todate = $_POST['todate'];
+
+                                                $query = "SELECT SUM(amount) AS total_amount
+                                                        FROM tiffinorder
+                                                        WHERE date >= '$fromdate' AND date <= '$todate'";
+                                                $result = mysqli_query($connection, $query);
+
+                                                // Fetch result
+                                                $row = mysqli_fetch_assoc($result);
+                                                $total_amount = $row['total_amount'] ?? 0;
+                                                ?> 
+                                                <td style="color: orange;"  >  <?php echo $row ['total_amount'] ?? 0 ?> </td>
+                                                
+                                                <?php
+                                                
+                                            }
+                                        }
+
+                                        ?>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                       </div>
                       
+                    <div class="row mt-2 d-flex justify-content-center">
+                        <div class="col-lg-4">
+                        <table class="table text-center table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                <th scope="col">Profit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <?php
+                                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                        if (isset($_POST['filterbtn'])) {
+                                            $fromdate = $_POST['fromdate'];
+                                            $todate = $_POST['todate'];
+
+                                            // Query to calculate profit directly
+                                            $query = "
+                                                SELECT 
+                                                    (IFNULL((SELECT SUM(amount) FROM tiffinorder WHERE date >= '$fromdate' AND date <= '$todate'), 0) - 
+                                                    IFNULL((SELECT SUM(amount) FROM expense WHERE date >= '$fromdate' AND date <= '$todate'), 0)) AS profit
+                                            ";
+
+                                            $result = mysqli_query($connection, $query);
+
+                                            if ($result) {
+                                                $row = mysqli_fetch_assoc($result);
+                                                $profit = $row['profit'] ?? 0;
+
+                                                // Display profit
+                                                ?>
+                                              
+                                                <td> <?php echo $profit; ?> RS</td>
+                                                <?php
+                                            } else {
+                                                echo "Error: " . mysqli_error($connection);
+                                            }
+
+                                            // Close connection
+                                            mysqli_close($connection);
+                                        }
+                                    }
+                                    ?>
+                                <!-- <td id="profit-box">0 </td> -->
+                                </tr>   
+                            </tbody>
+                            </table> 
+                        </div>
+                    </div>
                     </div>
                 </div>
             </section>
         </main>
+
+        
 
 
 <?php include 'footer.php' ?>

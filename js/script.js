@@ -141,3 +141,20 @@ function confirmexpenseDelete(id) {
         }
     });
 };
+
+
+
+    // tiffin order table
+    function calculateAmount() {
+    // Get selected tiffin price
+    const tiffinPrice = document.getElementById("tiffinType").value;
+
+    // Get tiffin count
+    const tiffinCount = document.getElementById("tiffinCount").value;
+
+    // Calculate amount
+    const amount = tiffinPrice && tiffinCount ? tiffinPrice * tiffinCount : "";
+
+    // Set the amount in the input field
+    document.getElementById("amount").value = amount ? `₹${amount}` : "";
+}
