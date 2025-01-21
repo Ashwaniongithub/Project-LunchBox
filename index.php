@@ -51,7 +51,7 @@
                         <input type="password" class="form-control" id="password" placeholder="Enter password" required>
                     </div>
                     <div class="d-grid">
-                        <a href="dashboard.html" type="submit" class="button">Submit</a>
+                        <a href="dashboard.php" type="submit" class="button">Submit</a>
                     </div>
                 </form>
             </div>

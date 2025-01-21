@@ -72,55 +72,89 @@ $(document).ready(function () {
 
 
 
-//   sweet alert js
-function showSuccessAlert() {
+// delete confirmation
+           
+function confirmDelete(id) {
     Swal.fire({
-        title: 'Success!',
-        text: 'Data has been added successfully',
-        icon: 'success',
-        confirmButtonText: 'OK',
-        confirmButtonColor: '#3085d6',
-        timer: 2000,
-        timerProgressBar: true,
-        toast: false,
-        position: 'center',
-        showConfirmButton: true
+        title: "Are you sure?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
     }).then((result) => {
-        // You can handle post-alert actions here
         if (result.isConfirmed) {
-            // Do something when user clicks OK
-            console.log('User clicked OK');
+            // Redirect to the delete link with the ID
+            window.location.href = "customer.php?id=" + id;
         }
     });
-}
+};
 
-
-
-// delete sweet alert
-document.getElementById('delete-button').addEventListener('click', function () {
+function confirmtiffinDelete(id) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
+        title: "Are you sure?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
     }).then((result) => {
-      if (result.isConfirmed) {
-        // Handle the deletion logic here
-        Swal.fire(
-          'Deleted!',
-          'Your data has been deleted.',
-          'success'
-        );
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your data is safe :)',
-          'error'
-        );
-      }
+        if (result.isConfirmed) {
+            // Redirect to the delete link with the ID
+            window.location.href = "tiffin_type.php?id=" + id;
+        }
     });
-  });
+};
+
+function confirmorderDelete(id) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to the delete link with the ID
+            window.location.href = "add_tiffin_order.php?id=" + id;
+        }
+    });
+};
+
+function confirmexpenseDelete(id) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to the delete link with the ID
+            window.location.href = "expenses.php?id=" + id;
+        }
+    });
+};
+
+
+
+    // tiffin order table
+    function calculateAmount() {
+    // Get selected tiffin price
+    const tiffinPrice = document.getElementById("tiffinType").value;
+
+    // Get tiffin count
+    const tiffinCount = document.getElementById("tiffinCount").value;
+
+    // Calculate amount
+    const amount = tiffinPrice && tiffinCount ? tiffinPrice * tiffinCount : "";
+
+    // Set the amount in the input field
+    document.getElementById("amount").value = amount ? `₹${amount}` : "";
+}
